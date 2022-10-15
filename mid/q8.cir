@@ -1,0 +1,24 @@
+bjt
+ 
+vin 8 0 Sin(0 100m 2k 0 0 0)
+vcc 1 0 12
+R1 1 2 36k
+R2 2 0 10k
+Rc 1 6 5k
+vdc 6 3
+Re 5 7 1.99k
+vde 7 0
+vdb 2 4
+Q1 3 4 5 Q2N2222A
+cb 2 8 2.040u
+cc 6 9 4.080u
+Rl 9 0 1k
+ce 5 0 8u
+.model Q2N2222A NPN(IS=8.11E-14 BF=205 VAF=113 IKF=0.5 ISE=1.06E-11 NE=2 BR=4 VAR=24 IKR=0.225 RB=1.37 RE=0.343 RC=0.137 CJE=2.95E-11 TF=3.97E-10 CJC=1.52E-11 TR=8.5E-8 XTB=1.5)
+.tran 0.1ms 10ms
+
+.control
+run
+plot v(8) v(9)
+.endc
+.end

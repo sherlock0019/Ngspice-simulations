@@ -1,0 +1,18 @@
+Q-1a transient response of opamp model to confirm its working as an amplifier
+C1 0 3 10n IC=0v
+R3 0 3 10Meg
+R1 4 5 2k
+R2 5 0 1k
+E1 1 2 5 0 1
+G1 0 3 2 0 0.01
+E2 4 0 3 0 1
+*Giving a step input
+Vin 1 0 Pulse(0 1 0 0 30 20 20)
+.tran 0.005ms 4ms uic
+
+.control
+run
+*plotting input and output voltages
+plot v(1) v(4)
+.endc
+.end

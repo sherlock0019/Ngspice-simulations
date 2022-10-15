@@ -1,0 +1,29 @@
+BJT amplifier
+
+vcc 7 0 dc=12v
+vin 8 0 ac 1
+
+cb 8 4 0.25u
+cc 5 9 4u
+ce 3 0 8u
+
+r1 7 4 36k
+r2 4 0 10k
+rc 7 5 5k
+re 6 0 1.99k
+rl 9 0 1k
+
+vb 4 2 dc=0
+vc 5 1 dc=0
+ve 3 6 dc=0
+
+q1 1 2 3 Q2N2222A
+
+.MODEL Q2N2222A NPN(IS=8.11E-14 BF=205 VAF=113 IKF=0.5 ISE=1.06E-11 + NE=2 BR=4 VAR=24 IKR=0.225 RB=1.37 RE=0.343 RC=0.137 CJE=2.95E-11 + TF=3.97E-10 CJC=1.52E-11 TR=8.5E-8 XTB=1.5)
+
+.ac dec 10 100 100Meg
+.control
+run
+plot vdb(9)-vdb(8) xlog
+.endc
+.end

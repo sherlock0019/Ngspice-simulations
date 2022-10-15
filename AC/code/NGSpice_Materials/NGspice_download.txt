@@ -1,0 +1,2 @@
+Refer the following link for ngspice download and basic tutorials:
+http://ngspice.sourceforge.net/

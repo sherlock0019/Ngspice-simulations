@@ -1,0 +1,27 @@
+I-V Characteristics of CD4007
+
+*CD4007 MOS Array
+* N4007 (NMOS on CD4007 CMOS integrated circuit)
+.model MN4007 NMOS (Kp=500u Vto=1.5 Lambda=0.01 Gamma=0.6+ Xj=0 Tox=1200n Phi=.6 Rs=0 Rd=0 Cbd=2.0p Cbs=2.0p Pb=.8 Cgso=0.1p Cgdo=0.1p Is=16.64p N=1)
+* P4007 (PMOS on CD4007 CMOS integrated circuit)
+.model MP4007 PMOS (Kp=500u Vto=-1.5 Lambda=0.04 Gamma=0.6+ Xj=0 Tox=1200n Phi=.6 Rs=0 Rd=0 Cbd=4.0p Cbs=4.0p Pb=.8 Cgso=0.2p Cgdo=0.2p Is=16.64p N=1)
+
+*Fixing gate bias at 3.5V
+
+vgg 1 0 dc 2v
+rg 1 2 5k
+M1 3 2 0 0 MN4007
+Rd 3 4 100
+
+*DC source of 0v to measure current
+vid 5 4 dc 0v
+vdd 5 0 dc 2v
+
+*DC analysis to sweep vds from 0 to 5V
+.dc vgg 2 5 0.5
+
+.control
+run
+plot vid#branch vs v(1) title 'I-V Characteristics of CD4007'
+.endc
+.end

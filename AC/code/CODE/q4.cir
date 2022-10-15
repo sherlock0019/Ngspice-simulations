@@ -1,0 +1,20 @@
+AC amplifier
+*including op-amp subcircuit file
+.include ua741.txt
+X1 1 2 3 4 5 UA741
+R1 5 2 11K
+R2 2 0 1K
+Rl 1 0 1k
+C1 6 1 15.9u
+vcc 3 0 dc 15v
+vee 4 0 dc -15v
+*Giving a sinusoidal input
+Vin 6 0 dc 0 ac 1
+.ac dec 10 10 1Meg
+.control
+run
+*plotting input and output voltages
+*difference in log scale is divison in actual scale
+plot vdb(5)-vdb(6) xlog
+.endc
+.end

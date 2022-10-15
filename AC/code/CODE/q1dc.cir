@@ -1,0 +1,19 @@
+Q-1c plot the transfer function of the opamp model (Vo/Vin) in dB on a semilogX plot.
+C1 0 3 10n IC=0v
+R3 0 3 10Meg  
+R1 4 5 10k
+R2 5 0 10k
+G1 0 3 1 0 10m
+E2 4 0 3 0 1
+*Giving a step input
+Vin 1 0 dc 0 ac 1
+.ac dec 10 10 1Meg
+
+.control
+run
+*plotting input and output voltages
+*difference in log scale is divison in actual scale
+plot vdb(4)-vdb(1) xlog 
+.endc
+.end
+

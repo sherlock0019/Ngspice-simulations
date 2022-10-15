@@ -1,0 +1,26 @@
+Clipper circuit
+*200030033_Q2
+*netlist
+R1 a b 1000
+D1 b c D1N750
+Vin a 0 dc 0 Sin(2 2 1000 0 0 0)
+Vdc c 0 dc 2
+
+.tran 0.01ms 10ms
+.model D1N750 D(Vj=.655 Cjo=175p Rs=.25 Eg=1.11 M=.5516 Nbv=1.6989 N=1 Bv=8.1 Fc=.5 Ikf=0 Ibv=20.245m Is=9.804E-18 Xti=3) 
+
+
+*control statements
+.control 
+run
+*white background
+set color0=white
+*black grid and text (only needed with X11, automatic with MS Win)
+set color1=black
+*wider grid and plot lines
+set xbrushwidth=2
+
+plot v(b) v(a)
+
+.endc
+.end

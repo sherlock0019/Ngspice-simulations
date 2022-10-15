@@ -1,0 +1,33 @@
+Voltage to current converter
+*including op-amp subcircuit file
+.include ua741.txt
+X1 1 2 3 4 5 UA741
+
+vcc 3 0 dc 15v
+vee 4 0 dc -15v
+
+*piecewise linear input voltage
+vin 6 0 pwl (0 0 0.01ns 0 2000ns 2v)
+*transient analysis
+.tran 0.01ns 2000ns uic
+
+R1 1 6 1k
+R2 1 7 1k
+R3 1 5 1k
+R4 2 0 1k
+R5 2 5 1k
+
+.model D1N750 D(Vj=.655 Cjo=175p Rs=.25 Eg=1.11 M=.5516 Nbv=1.6989 N=1 Bv=8.1 Fc=.5 Ikf=0 Ibv=20.245m is=9.804e-18 xti=3)
+D1 7 0 D1N750
+
+C1 7 0 1n
+.control
+run
+*plotting input and output voltages
+*difference in log scale is divison in actual scale
+plot v(6) v(7) 
+plot @d1[id] vs v(6)
+.endc
+.end
+
+

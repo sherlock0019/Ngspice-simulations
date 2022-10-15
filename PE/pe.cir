@@ -1,0 +1,40 @@
+Full wave rectifier
+
+V1 2 1 SIN(0 16.97 50 0 0 0)
+Vdi 2 3 dc 0
+Rin 3 4 0.01
+D1 0 4 1N4001
+D2 4 5 1N4001
+D3 0 1 1N4001
+D4 1 5 1N4001
+Cin 5 0 3m
+Vdo 5 6 dc 0
+Rl 6 0 47
+
+*RMS value of the input current
+.measure tran I-input-rms RMS i(vdi) from=20m to=40m
+*Peak value of input current
+.measure tran I-input-peakvalue MAX i(vdi) from=20m to=40m
+*Peak-Peak value of the output voltage
+.measure tran V-output-peakpeak PP v(6) from=20m to=40m
+
+.model 1N4001 D(Is=14.11n N=1.984 Rs=33.89m Ikf=94.81 Xti=3 Eg=1.11 Cjo=25.89p M=.44 Vj=.3245 Fc=.5 Bv=75 Ibv=10u Tt=5.7u Iave=1 Vpk=50 mfg=GI)
+.tran 0.001s 0.1s
+
+.control
+run
+*white background 
+set color0=white 
+* black grid and text (only needed with X11, automatic with MS Win) 
+set color1=black 
+* wider grid and plot lines 
+set xbrushwidth=2 
+plot v(6)
+plot v(2,1) 
+*output current
+plot i(vdo)
+*input current
+plot i(vdi)
+.endc
+.end
+

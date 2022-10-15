@@ -1,0 +1,26 @@
+Full wave rectifier
+
+Vin 1 0 SIN(0 16.97 50 0 0 0)
+vdi 1 2 dc 0
+vdo 4 6 dc 0
+
+.model Da1N4004 D(IS=18.8n RS=0 BV=400 IBV=5.00u CJO=30 M=0.333 N=2)
+
+Rin 2 3 0
+Rload 3 5 47
+
+Cload 4 5 1.6m
+
+D1 4 3 Da1N4004
+D2 3 5 Da1N4004
+D3 4 0 Da1N4004
+D4 0 5 Da1N4004
+
+.tran 0.1ms 100ms
+.measure tran yrms RMS (i(vdo))*47 from=50m to=100m
+
+.control
+run
+plot v(1) (i(vdo))*47
+.endc
+.end

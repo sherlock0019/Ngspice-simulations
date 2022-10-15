@@ -1,0 +1,20 @@
+jai nitin
+Vin 1 0 dc=5
+r1 2 1 1k
+d1 2 0 red
+.model red D(Vj=.75 Cjo=175p Rs=.25 Eg=3.2 M=.5516 Nbv=1.6989 N=2.4 Bv=1.7 Fc=.5 Ikf=0 Ibv=20.245m Is=880.5E-18  Xti=3)
+d2 2 0 blue
+.model blue D(IS=93.1P RS=42M N=7.47 BV=5 IBV=30U CJO=2.97P VJ=.75 M=.333 TT=4.32U)
+d3 2 0 green
+.model green D(Is=1e-19 Rs=1.5 N=1.5 Cjo=50p Iave=30m Vpk=5)
+.save all @d1[id]
+.save all @d2[id]
+.save all @d3[id]
+.dc Vin 0 100000 0.5
+.control
+run
+plot @d1[id] vs v(2), @d2[id] vs v(2), @d3[id] vs v(2)
+.dc Vin 0 100 0.5
+plot db(@d1[id]) vs v(2), db(@d2[id]) vs v(2), db(@d3[id]) vs v(2)
+.endc
+.end

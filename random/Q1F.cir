@@ -1,0 +1,22 @@
+*q1
+v1 1 0 dc=5  
+d1 2 5 red
+d2 3 6 green
+d3 4 7 blue
+r1 1 2 1k
+r2 1 3 1k
+r3 1 4 1k
+vd1 5 0
+vd2 6 0
+vd3 7 0
+.model red D(Vj=.75 Cjo=175p Rs=.25 Eg=1.11 M=.5516 Nbv=1.6989 N=1 Bv=8.1 Fc=.5 Ikf=0 Ibv=20.245m Is=880.5E-18  Xti=3)
+.model green D(Is=1e-19 Rs=1.5 N=1.5 Cjo=50p Iave=30m Vpk=5)
+.model blue D(IS=93.1P RS=42M N=7.47 BV=5 IBV=30U CJO=2.97P VJ=.75 M=.333 TT=4.32U)
+.save all @D1[id] @D2[id] @D3[id]
+.dc v1 -10 5 0.05  
+* Control Statements  
+.control  
+  run    
+plot i(vd1) vs v(2,5),i(vd2) vs v(3,6),i(vd3) vs v(4,7)
+.endc  
+.end

@@ -1,0 +1,16 @@
+Amplifier using an opamp with a gain of 20 ac analysis
+*including op-amp subcircuit file
+.include ua741.txt
+X1 1 2 3 4 5 UA741
+R1 5 2 19k
+R2 2 0 1k
+Vcc 3 0 dc 15v
+Vee 4 0 dc -15v
+*Finding bandwidth
+Vin 1 0 dc 0 ac 1
+.ac dec 10 1 1Meg
+.control
+run
+plot vdb(5)-vdb(1) xlog
+.endc
+.end

@@ -1,0 +1,29 @@
+Full wave rectifier
+V1 a 0 dc 0 Sin(0 2.5 1k 0 0 0)
+D1 a b D1N750
+D2 0 b D1N750
+D3 c a D1N750
+D4 c 0 D1N750
+RL b c 1Meg
+Rs b d 1Meg
+D5 c d D1N4148
+R d c 1Meg
+.model D1N750 D(Vj=.75 Cjo=175p Rs=.25 Eg=1.11 M=.5516 Nbv=1.6989 N=1 Bv=8.1 Fc=.5 Ikf=0 Ibv=20.245m Is=880.5E-18 Xti=3)
+.model D1N4148 D(Is=5.84n N=1.94 Rs=.7017 Ikf=44.17m Xti=3 Eg=1.11 Cjo=.95p M=.55 Vj=.75 Fc=.5 Isr=11.07n Nr=2.088 Bv=100 Ibv=100u Tt=11.07n)
+.tran 0.01ms 10ms
+
+*control statements
+.control
+run
+
+*white background
+set color0=white
+* black grid and text (only needed with X11, automatic with MS Win)
+set color1=black
+* wider grid and plot lines
+set xbrushwidth=2
+
+plot v(d,c) v(a)
+.endc
+.end
+

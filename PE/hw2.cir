@@ -1,0 +1,36 @@
+Full wave rectifier
+
+Vin 6 0 SIN(0 16.97 50 0 0 0)
+vdo 5 3 dc 0
+vdi 6 1 dc 0
+Rin 1 2 0.01
+
+D1 2 4 1N4001
+D2 3 2 1N4001
+D3 3 0 1N4001
+D4 0 4 1N4001
+
+C1 3 4 3m
+Rl 5 4 47
+
+.model 1N4001 D(Is=14.11n N=1.984 Rs=33.89m Ikf=94.81 Xti=3 Eg=1.11 Cjo=25.89p M=.44 Vj=.3245 Fc=.5 Bv=75 Ibv=10u Tt=5.7u Iave=1 Vpk=50 mfg=GI)
+.tran 0.02ms 0.2s
+
+*RMS value of the input current
+.measure tran I-input-rms RMS i(vdi) from=20m to=40m
+*Peak value of input current
+.measure tran I-input-peakvalue MAX i(vdi) from=20m to=40m
+*Peak-Peak value of the output current - for checking if the output voltage is 1V p-p
+.measure tran I-output-peakpeak PP i(vdo) from=20m to=40m
+
+
+.control
+run
+*input voltage and output voltage
+plot v(6) v(4)-v(5)
+*output current
+plot i(vdo)
+*input current
+plot i(vdi)
+.endc
+.end

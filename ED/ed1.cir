@@ -1,0 +1,20 @@
+DIODE CHARACTERISTICS
+v1 1 0 dc=5 
+d1 1 2 D1N750 
+r1 2 0 1k 
+.model D1N750 D(Vj=.655 Cjo=175p Rs=.25 Eg=1.11 M=.5516 Nbv=1.6989 N=1 Bv=8.1 Fc=.5 Ikf=0 Ibv=20.245m is=9.804e-18 xti=3) 
+.save all @d1[id] @r1[p]
+.dc v1 -10 5 0.05
+
+* Control Statements 
+.control 
+ run 
+*white background 
+set color0=white 
+* black grid and text (only needed with X11, automatic with MS Win) 
+set color1=black 
+* wider grid and plot lines 
+set xbrushwidth=2 
+plot @d1[id] vs v(1) 
+.endc 
+.end 

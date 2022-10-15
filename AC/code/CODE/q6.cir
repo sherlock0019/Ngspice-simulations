@@ -1,0 +1,19 @@
+voltage to current converter for currents ranging from 100 nA to 10 µA
+*including op-amp subcircuit file
+.include ua741.txt
+X1 1 2 3 4 5 UA741
+R1 5 2 1k
+R2 5 1 1k
+R3 1 9 1k
+R4 2 0 1k
+Rl 1 0 100
+Vcc 3 0 dc 15v
+Vee 4 0 dc -15v
+*giving step input
+Vin 1 0 dc 0.1v
+.tran 0.005s 4ms uic
+.control
+run
+plot @Rl[i] 
+.endc
+.end

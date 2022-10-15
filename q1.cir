@@ -1,0 +1,24 @@
+BJT Common Emitter Amplifier Characteristics
+
+Vcc 4 0 12
+
+R1 4 5 36k
+R2 5 0 10k
+Rc 4 7 5k
+Re 3 8 1.99k
+
+vdc 7 1 dc=0
+vde 8 0 dc=0
+vdb 5 2 dc=0
+Q1 1 2 3 Q2N2222A
+
+.model Q2N2222A NPN(IS=8.11E-14 BF=205 VAF=113 IKF=0.5 ISE=1.06E-11 NE=2 BR=4 VAR=24 IKR=0.225 RB=1.37 RE=0.343 RC=0.137 CJE=2.95E-11 TF=3.97E-10 CJC=1.52E-11 TR=8.5E-8 XTB=1.5)
+.dc Vcc 0 12 12 
+
+*Control Statements
+.control
+run
+print v(1,3) v(3) 
+print i(vdc) i(vdb) i(vde)
+.endc
+.end

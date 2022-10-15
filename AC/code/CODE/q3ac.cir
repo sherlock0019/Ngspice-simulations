@@ -1,0 +1,16 @@
+Amplifier using an opamp with a gain of 20 transient
+*including op-amp subcircuit file
+.include ua741.txt
+X1 1 2 3 4 5 UA741
+R1 5 2 19k
+R2 2 0 1k
+Vcc 3 0 dc 15v
+Vee 4 0 dc -15v
+*Giving a sinusoidal input
+Vin 1 0  Sin(0 0.1 50 0.1 0 30)
+.tran 0.005s 1ms uic
+.control
+run
+plot v(1) v(5)
+.endc
+.end

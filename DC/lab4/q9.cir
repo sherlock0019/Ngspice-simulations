@@ -1,0 +1,29 @@
+output  voltage waveform and input voltage waveform for Vin = 200 mVp−p at 1kHz
+
+.model MN4007 NMOS (Kp=500u Vto=1.5 Lambda=0.01 Gamma=0.6+ Xj=0 Tox=1200n Phi=.6 Rs=0 Rd=0 Cbd=2.0p Cbs=2.0p Pb=.8 Cgso=0.1p Cgdo=0.1p Is=16.64p N=1)
+
+M1 3 4 0 0 MN4007
+
+Vdd 1 0 10v
+Vd 1 2 0
+Vd1 1 5 0
+Vin 7 0 sin (0 100m 1k 0 0 0)
+
+Rd 2 3 4k
+R1 5 4 7.5k
+R2 4 0 3.214k
+Rl 8 0 100k
+Rg 6 7 1k
+
+C1 4 6 2.2u
+C2 3 8 2.2u
+
+.tran 0.001ms 5ms 0.1ms
+.control
+op
+run
+plot v(7) v(8)
+.endc
+.end
+
+

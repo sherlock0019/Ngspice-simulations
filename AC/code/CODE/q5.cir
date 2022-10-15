@@ -1,0 +1,27 @@
+Band Stop Filter that blocks all signals between 300 Hz and 3 KHz
+.include UA741.txt
+Xlp 3 5 9 8 5 UA741
+Xhp 2 4 9 8 4 UA741
+X1 0 6 9 8 7 UA741
+
+Vcc 9 0 dc 15v
+Vee 8 0 dc -15v
+
+Chp 1 2 1u
+Clp 3 0 1u
+Rhp 2 0 53.0516
+Rlp 1 3 530.516
+
+R1 5 6 1Meg
+R2 4 6 1Meg
+R3 6 7 1Meg
+*Giving a sinusoidal input
+Vin 1 0 dc 0 ac 1
+.ac dec 10 1 1Meg
+
+.control
+run
+*plotting input and output voltages
+plot vdb(7)
+.endc
+.end

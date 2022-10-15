@@ -1,0 +1,15 @@
+LC PI FILTER AC analysis
+
+*Giving a sinusoidal input
+Vin 1 0 ac 1 dc 0
+R1 1 2 50
+L1 2 0 20m
+L2 3 0 20m
+C1 2 3 20n
+
+.ac dec 10 1 1Meg
+.control
+run
+plot vdb(3)-vdb(1) xlog
+.endc
+.end

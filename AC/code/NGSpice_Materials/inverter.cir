@@ -1,0 +1,40 @@
+inverter transient analysis 
+
+* include tsmc_model file
+.include tsmc_spice_model.txt
+
+
+
+********************************
+*supply voltages , input sources and dummy sources for current 
+vdd 4 0 dc 1.8V
+
+vin 1 0 pulse (0 1.8v 0 0 0 5us 10us)
+
+vid 4 3 dc 0V
+
+
+*Element instantiation
+
+m1 2 1 0 0 cmosn w=2um L=0.18um
+
+m2 2 1 3 3 cmosp w=2um L=0.18um
+
+
+*perform transient analysis
+
+.tran 0.01us 20us
+
+*execution of the analysis
+.control
+run
+set color0=white
+set color1=black
+set color2=black
+set xbrushwidth=3
+plot  v(2) 
+plot v(1) 
+.endc
+.end
+
+

@@ -1,0 +1,24 @@
+RC Circuit Transient Response
+r1 2 3 1k
+c1 3 0 1u
+vin 1 0 pwl (0 0 10ms 0 11ms 5v 20ms 5v)
+vmeasure 1 2 DC 0V
+.tran 0.02ms 20ms
+.measure tran idt AVG i(vin) from=0 to=20m
+.control
+run
+plot v(1) v(2)
+let mypower = i(vmeasure)*v(1)
+plot mypower
+
+let mypower_avg = 0
+let h=1 
+let L1 = length(time) - 1
+while h <= L1 
+  let mypower_avg  = mypower[h] + mypower_avg 
+  let h = h + 1
+end
+let mypower_avg = mypower_avg / length(time)
+print mypower_avg
+.endc
+.end
